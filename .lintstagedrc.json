@@ -1,0 +1,3 @@
+{
+  "*.{js,ts,jsx,tsx}": "pnpm -r exec eslint --cache --fix"
+}
