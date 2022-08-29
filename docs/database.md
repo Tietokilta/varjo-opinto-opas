@@ -1,30 +1,36 @@
 ## Schema
 
-### Courses
+### Course
 |Param|Info|Example|
 |---|---|---|
-|Course code|PRIMARY KEY|CS-A1234|
-|Name|||
-|Credit max||8|
-|Credit min||3|
-|Language|fi, sv, en|en|
-|Period||1-2,5|
-|Grade Scale|0-5, Hyv/Hyl||
-|Prerequsites|free text||
-|Learning Results|free text||
-|Course Content|free text||
-|Grading information|free text||
-|Additional information|free text||
-|Updated|when db row has been changed?||
+|course_code|primary key|CS-A1234|
+|credits_max||8|
+|credits_min||3|
+|language|fi, sv, en|en|
+|period||1-2,5|
+|last_updated|when course info has been changed||
+
+### CourseTranslation
+|Column|Info|Example|
+|---|---|---|
+|course_code|foreign key|CS-A1234|
+|translation|fi, sv, en|en|
+|name|||
+|grade_scale|0-5, Hyv/Hyl||
+|prerequisites|free text||
+|learning_results|free text||
+|content|free text||
+|grading_information|free text||
+|additional_information|free text||
 
 
 ### Review
-|Param|Info|Example|
+|Column|Info|Example|
 |---|---|---|
-|id|PRIMARY KEY||
-|Course code||CS-A1234|
-|Course taken|when user has taken the course?||
-|Rating|1-5||
-|Workload|1-5||
-|Review written|fi, sv, en||
-|Review|free text||
+|id|primary key||
+|course_code||CS-A1234|
+|course_taken|when user has taken the course||
+|rating|1-5||
+|workload|1-5||
+|review_lang|fi, sv, en||
+|review|free text||
