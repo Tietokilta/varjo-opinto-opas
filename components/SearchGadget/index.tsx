@@ -3,15 +3,28 @@ import { useState } from 'react'
 import FilterGroup from './FilterGroup'
 import { periodOption, creditOption } from '../../types/types'
 
+interface SearchGadgetProps {
+  searchTerm: string
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+  selectedPeriod: periodOption
+  setSelectedPeriod: React.Dispatch<React.SetStateAction<periodOption>>
+  selectedCredits: creditOption
+  setSelectedCredits: React.Dispatch<React.SetStateAction<creditOption>>
+}
+
 const periodOptions: periodOption[] = ['I', 'II', 'III', 'IV', 'V', '🏖']
 const creditOptions: creditOption[] = ['1', '2', '3', '4', '5', '6', '≥7']
 
-const SearchGadget = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('')
-  const [selectedPeriod, setSelectedPeriod] = useState<periodOption>(undefined)
-  const [selectedCredits, setSelectedCredits] =
-    useState<creditOption>(undefined)
+// TODO: Excessive prop drilling with state and state setters. Possibly refactor using global state with better time.
 
+const SearchGadget = ({
+  searchTerm,
+  setSearchTerm,
+  selectedPeriod,
+  setSelectedPeriod,
+  selectedCredits,
+  setSelectedCredits,
+}: SearchGadgetProps) => {
   const handleSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(event.target.value)
 
