@@ -32,18 +32,28 @@ export default function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  console.log('request')
   if (request.method === 'GET') {
-    const { text, period, credits } = request.query
+    const { searchTerm, selectedPeriod, selectedCredits } = request.query
 
-    if (!(text || period || credits)) {
+    // TODO: Remove
+    const term = searchTerm as string
+
+    if (!(searchTerm || selectedPeriod || selectedCredits)) {
       return response.status(400).json({ error: 'No params specified!' })
     }
 
     // TODO: Remove
-    console.log('Text: ', text)
-    console.log('Period: ', period)
-    console.log('Credits: ', credits)
-    response.status(200).json(courseMockData)
+    console.log('Text: ', searchTerm)
+    console.log('Period: ', selectedPeriod)
+    console.log('Credits: ', selectedCredits)
+    response
+      .status(200)
+      .json(
+        courseMockData.filter((course) =>
+          course.name.toLowerCase().includes(term.toLowerCase())
+        )
+      )
   } else {
     response.status(404)
   }
