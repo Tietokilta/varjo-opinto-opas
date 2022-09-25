@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { courseBasics } from '../../types/types'
+import { courseBasics } from '../../../types/types'
 
 const courseMockData: courseBasics[] = [
   {
@@ -32,7 +32,6 @@ export default function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  console.log('request')
   if (request.method === 'GET') {
     const { searchTerm, selectedPeriod, selectedCredits } = request.query
 
