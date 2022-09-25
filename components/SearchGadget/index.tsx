@@ -43,8 +43,10 @@ const SearchGadget = ({
   return (
     <div
       className={`flex w-10/12 ${
-        slim ? '' : 'flex-col'
-      } gap-8 rounded-3xl border border-gray-100 bg-white p-12 shadow-lg drop-shadow-xl`}
+        slim
+          ? 'border-2 border-gray-300 p-6'
+          : 'flex-col border border-gray-100 p-12 drop-shadow-xl'
+      } gap-8 rounded-3xl bg-white`}
     >
       <Searchbar
         value={searchTerm}
