@@ -1,0 +1,7 @@
+POST https://varjoopintoopas.fi/api/search
+Content-Type: application/x-www-form-urlencoded
+
+search=Ohjelmointi
+&credit=Any
+&period=Any
+&sort=rating desc
