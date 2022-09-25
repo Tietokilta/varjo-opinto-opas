@@ -1,0 +1,26 @@
+{
+    "name": "varjo-opinto-opas-postgres",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "migrate": "knex migrate:latest",
+        "dev": "ts-node src/database.ts",
+        "start": "ts-node dist/app.js",
+        "build": "tsc -p ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "knex": "2.3.0",
+        "pg": "8.8.0",
+        "objection": "3.0.1"
+    },
+    "devDependencies": {
+        "typescript": "4.8.3",
+        "ts-node": "10.9.1",
+        "@types/node": "7.0.5",
+        "@types/knex": "0.16.1"
+    }
+}
