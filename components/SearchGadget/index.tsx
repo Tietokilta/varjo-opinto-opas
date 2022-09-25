@@ -10,6 +10,7 @@ interface SearchGadgetProps {
   setSelectedPeriod: React.Dispatch<React.SetStateAction<periodOption>>
   selectedCredits: creditOption
   setSelectedCredits: React.Dispatch<React.SetStateAction<creditOption>>
+  slim: boolean
 }
 
 const periodOptions: periodOption[] = ['I', 'II', 'III', 'IV', 'V', '🏖']
@@ -24,6 +25,7 @@ const SearchGadget = ({
   setSelectedPeriod,
   selectedCredits,
   setSelectedCredits,
+  slim,
 }: SearchGadgetProps) => {
   const handleSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(event.target.value)
@@ -39,8 +41,16 @@ const SearchGadget = ({
   }
 
   return (
-    <div className="flex w-10/12 flex-col gap-8 rounded-3xl border border-gray-100 bg-white p-12 shadow-lg drop-shadow-xl">
-      <Searchbar value={searchTerm} onChange={handleSearchTermChange} />
+    <div
+      className={`flex w-10/12 ${
+        slim ? '' : 'flex-col'
+      } gap-8 rounded-3xl border border-gray-100 bg-white p-12 shadow-lg drop-shadow-xl`}
+    >
+      <Searchbar
+        value={searchTerm}
+        onChange={handleSearchTermChange}
+        slim={slim}
+      />
       <div className="flex flex-wrap justify-around gap-6 px-5">
         <FilterGroup
           label="Period"
