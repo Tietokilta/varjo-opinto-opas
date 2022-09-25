@@ -1,4 +1,4 @@
-version: '3.7' # Compose file version
+version: "3.7" # Compose file version
 
 services:
   database:
@@ -31,6 +31,21 @@ services:
         condition: service_healthy
     networks:
       - voo
+
+  next:
+    build:
+      context: ./packages/frontend
+      dockerfile: Dockerfile
+    container_name: voo-next-dev
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - voo
+    volumes:
+      - ./packages/frontend:/usr/src/app
+    ports:
+      - 3000:3000
 volumes:
   # Database data
   db-data:
