@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { creditOption, periodOption, courseBasics } from '../../types/types'
 import LoadingSpinner from '../Util/LoadingSpinner'
-import ResultCard from './ResultCard'
+import ResultTable from './ResultTable'
 
 const courseMockData: courseBasics[] = [
   {
@@ -15,6 +15,14 @@ const courseMockData: courseBasics[] = [
   {
     name: 'Tuotantotalous 1',
     code: 'TU-5014',
+    period: 'II',
+    credits: '5',
+    rating: '5',
+    workload: '1',
+  },
+  {
+    name: 'Tuotantotalous 2',
+    code: 'TU-5015',
     period: 'II',
     credits: '5',
     rating: '5',
@@ -39,7 +47,7 @@ const ResultsViewer = ({
       console.log('Fetching with filters:')
       console.log({ searchTerm, selectedPeriod, selectedCredits })
       setResults(courseMockData)
-    }, 5000)
+    }, 1000)
   }, [searchTerm, selectedPeriod, selectedCredits])
 
   const [results, setResults] = useState<courseBasics[] | [] | undefined>(
@@ -48,11 +56,9 @@ const ResultsViewer = ({
 
   return (
     <div className="flex h-full w-10/12 flex-col items-center gap-4">
-      {results ? (
-        results.length > 0 ? (
-          results.map((result) => (
-            <ResultCard key={result.code} resultData={result} />
-          ))
+      {results ? ( // Has backend returned the results?
+        results.length > 0 ? ( // Was there any results?
+          <ResultTable results={results} />
         ) : (
           <div className="flex flex-col items-center gap-4">
             <p className="text-6xl">😢</p>
