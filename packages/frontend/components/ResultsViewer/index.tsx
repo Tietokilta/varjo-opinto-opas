@@ -2,33 +2,7 @@ import { useState, useEffect } from 'react'
 import { creditOption, periodOption, courseBasics } from '../../types/types'
 import LoadingSpinner from '../Util/LoadingSpinner'
 import ResultTable from './ResultTable'
-
-const courseMockData: courseBasics[] = [
-  {
-    name: 'Data Structures And Algorithms',
-    code: 'CS-A1140',
-    period: 'I',
-    credits: '5',
-    rating: '4.7',
-    workload: '4.9',
-  },
-  {
-    name: 'Tuotantotalous 1',
-    code: 'TU-5014',
-    period: 'II',
-    credits: '5',
-    rating: '5',
-    workload: '1',
-  },
-  {
-    name: 'Tuotantotalous 2',
-    code: 'TU-5015',
-    period: 'II',
-    credits: '5',
-    rating: '5',
-    workload: '1',
-  },
-]
+import { searchCourses } from '../../services/courses'
 
 interface ResultsViewerProps {
   searchTerm: string
@@ -41,18 +15,24 @@ const ResultsViewer = ({
   selectedPeriod,
   selectedCredits,
 }: ResultsViewerProps) => {
+  const [results, setResults] = useState<courseBasics[] | [] | undefined>(
+    undefined
+  )
+
+  const updateListing = async () => {
+    const courses = await searchCourses(
+      searchTerm,
+      selectedPeriod,
+      selectedCredits
+    )
+    setResults(courses)
+  }
+
   useEffect(() => {
     setResults(undefined)
-    setTimeout(() => {
-      console.log('Fetching with filters:')
-      console.log({ searchTerm, selectedPeriod, selectedCredits })
-      setResults(courseMockData)
-    }, 1000)
-  }, [searchTerm, selectedPeriod, selectedCredits])
-
-  const [results, setResults] = useState<courseBasics[] | [] | undefined>(
-    courseMockData
-  )
+    const updateTimeout = setTimeout(() => updateListing(), 1000)
+    return () => clearTimeout(updateTimeout)
+  }, [searchTerm, selectedCredits, selectedPeriod])
 
   return (
     <div className="flex h-full w-10/12 flex-col items-center gap-4">
