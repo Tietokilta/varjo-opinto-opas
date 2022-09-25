@@ -1,0 +1,34 @@
+version: '3.7' # Compose file version
+
+services:
+  database:
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1234
+    networks:
+      - voo
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - voo
+
+  sisu:
+    build:
+      context: ./packages/database
+      dockerfile: Dockerfile
+    depends_on: 
+      - database
+    networks:
+      - voo
+volumes:
+  # Database data
+  db-data:
+
+networks:
+  # Nappikauppa network for development
+  voo:
