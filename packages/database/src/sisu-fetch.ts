@@ -55,9 +55,31 @@ const putCourseToDb = async (course: Course): Promise<void> => {
     })
 }
 
-function check(course: any): boolean {
-    return courseTypes.includes(course.type)
+const parseTeachingPeriod = (course: any): string => {
+    const stratPeriodLimits = ['02-20', '04-15', '06-01', '09-01', '10-15']
+    const endPeriodLimits = ['03-06', '05-01', '06-20', '09-14', '11-01']
+    let startPeriod = 3
+    let endPeriod = 3
+
+    stratPeriodLimits.forEach((limit) => {
+        if (limit < course.startDate.substring(5,)) { startPeriod += 1 }
+    })
+
+    endPeriodLimits.forEach((limit) => {
+        if (limit < course.endDate.substring(5,)) { endPeriod += 1 }
+    })
+
+    startPeriod = ((startPeriod - 1) % 6) + 1
+    endPeriod = ((endPeriod - 1) % 6) + 1
+
+    if ( startPeriod === endPeriod) {
+        return `${startPeriod}`
+    } 
+        return `${startPeriod}-${endPeriod}`
+    
 }
+
+const check = (course: any): boolean => courseTypes.includes(course.type)
 
 function format(sisuCourse: any): Course{
     const course: Course = {
@@ -66,7 +88,7 @@ function format(sisuCourse: any): Course{
             credits_max: sisuCourse.credits.max,
             credits_min: sisuCourse.credits.min,
             language: sisuCourse.summary.languageOfInstruction.en,
-            period: sisuCourse.summary.teachingPeriod.en,
+            period: parseTeachingPeriod(sisuCourse),
         },
         translations: []
     }
