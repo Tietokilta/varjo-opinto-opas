@@ -1,27 +1,34 @@
-exports.up = (knex) => {
-    return knex.schema
+exports.up = (knex) => knex.schema
       .createTable('course', (table) => {
-        table.string('course_code')
-        table.string('credits_max')
-        table.string('credits_min')
+        table.string('course_code').unique()
+        table.integer('credits_max')
+        table.integer('credits_min')
         table.string('language')
-        table.string('period')
-        table.string('last_updated')
+        table.text('period')
+        table.timestamp('updated_at').defaultTo(knex.fn.now())
       })
-      .createTable('course_translations', (table) => {
+      .createTable('translation', (table) => {
         table.string('course_code')
+        table.foreign('course_code').references('course.course_code')
         table.string('translation')
+        table.text('name')
         table.string('grade_scale')
-        table.string('prerequisites')
-        table.string('learning_results')
-        table.string('content')
-        table.string('grading_information')
-        table.string('additional_information')
+        table.text('prerequisites')
+        table.text('learning_results')
+        table.text('content')
+        table.text('grading_information')
+        table.text('additional_information')
+        table.timestamp('updated_at').defaultTo(knex.fn.now())
       })
-  }
-  
-  exports.down = (knex) => {
-    return knex.schema
-      .dropTableIfExists('course')
-      .dropTableIfExists('course_translations')
-  }
+      .createTable('review', (table) => {
+        table.increments()
+        table.string('course_code')
+        table.string('course_taken')
+        table.integer('rating')
+        table.integer('workload')
+        table.string('review_lang')
+        table.text('review')
+        table.timestamp('updated_at').defaultTo(knex.fn.now())
+      })
+
+exports.down = () => {}
