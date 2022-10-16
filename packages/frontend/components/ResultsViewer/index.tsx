@@ -21,6 +21,7 @@ const ResultsViewer = ({
 
   const updateListing = async () => {
     const courses = await searchCourses(
+      'fi',
       searchTerm,
       selectedPeriod,
       selectedCredits
@@ -32,6 +33,7 @@ const ResultsViewer = ({
     setResults(undefined)
     const updateTimeout = setTimeout(() => updateListing(), 1000)
     return () => clearTimeout(updateTimeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, selectedCredits, selectedPeriod])
 
   return (

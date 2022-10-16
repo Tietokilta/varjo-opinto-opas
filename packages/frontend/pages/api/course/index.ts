@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { courseBasics } from '../../../types/types'
 import Knex from 'knex'
 import knexConfig from '../../../knexfile'
+import { db } from '../../../lib/database'
 const knex = Knex(knexConfig.development)
 
 const courseMockData: courseBasics[] = [
@@ -31,10 +32,6 @@ const courseMockData: courseBasics[] = [
   },
 ]
 
-const fetchCoursesFromDB = async () => {
-  return await knex('course').select()
-}
-
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
@@ -45,7 +42,10 @@ export default async function handler(
     if (!(searchTerm || selectedPeriod || selectedCredits)) {
       return response.status(400).json({ error: 'No params specified!' })
     }
-    const data = await fetchCoursesFromDB()
+
+    const database = db();
+    const data = await database.searchCourses('fi')
+    await database.commit();
 
     response.status(200).json(
       data.map((course) => {

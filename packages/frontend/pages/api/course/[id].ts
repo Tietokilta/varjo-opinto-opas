@@ -1,13 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { db } from '../../../lib/database'
 
-export default function handler(
+export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
   const id = request.query.id
 
   if (request.method === 'GET') {
-    console.log('Would return courseFull info: ', id)
-    response.send('Would return full info for course ' + id)
+    const database = db()
+    const data = await database.getCourseInfo(Array.isArray(id) ? id[0] : id || '', 'fi')
+    await database.commit()
+    response.send(data)
   }
 }
