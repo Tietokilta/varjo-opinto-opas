@@ -1,5 +1,6 @@
-import { NextPage, GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import CourseStat from '../../components/CourseStat'
+import CourseTextBlock from '../../components/CourseTextBlock'
 import { courseFull } from '../../types/types'
 
 const CoursePage: NextPage<courseFull> = ({
@@ -13,7 +14,7 @@ const CoursePage: NextPage<courseFull> = ({
   learningResults,
 }: courseFull) => {
   return (
-    <div className="template-columns container mx-auto grid grid-cols-[1fr_1fr] grid-rows-[1fr_1fr]">
+    <div className="template-columns container mx-auto grid grid-cols-[1fr_1fr] grid-rows-[1fr_1fr] gap-8">
       <div>
         <p className="text-2xl text-gray-800">{code}</p>
         <h1 className="text-4xl font-bold text-gray-900">{name}</h1>
@@ -25,6 +26,8 @@ const CoursePage: NextPage<courseFull> = ({
         <CourseStat label="Rating" value={rating} />
         <CourseStat label="Workload" value={workload} />
       </div>
+      <CourseTextBlock label="Description" text={content} />
+      <CourseTextBlock label="Learning goals" text={learningResults} />
     </div>
   )
 }

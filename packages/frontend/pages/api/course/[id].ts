@@ -7,9 +7,9 @@ const mockCourseData = {
   credits: '5',
   rating: '4.9',
   workload: '3.9',
-  description:
+  content:
     'Kurssin suoritettuaan opiskelijalla on paremmat valmiudet ymmärtää ja arvioida liiketoimintamahdollisuuksia, suunnitella ja arvioida liiketoimintaprosesseja ja analysoida yrityksen taloudellista tilaa. Tavoitteena on myös oppia yleisiä insinöörityön valmiuksia projektin suunnitteluun, organisointiin ja hallintaan',
-  learningGoals:
+  learningResults:
     'Kurssin suoritettuaan opiskelijalla on paremmat valmiudet ymmärtää ja arvioida liiketoimintamahdollisuuksia, suunnitella ja arvioida liiketoimintaprosesseja ja analysoida yrityksen taloudellista tilaa. Tavoitteena on myös oppia yleisiä insinöörityön valmiuksia projektin suunnitteluun, organisointiin ja hallintaan',
   reviews: [
     { text: 'Ihan hyvä kurssi', rating: '4', workload: '3' },
