@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-gray-50 p-4">
+    <div className="grid min-h-screen grid-rows-[auto_1fr_auto] gap-10 bg-gray-50 p-4">
       <Header />
       <main>
         <Component {...pageProps} />

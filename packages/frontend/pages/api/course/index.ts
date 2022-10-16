@@ -4,33 +4,6 @@ import Knex from 'knex'
 import knexConfig from '../../../knexfile'
 const knex = Knex(knexConfig.development)
 
-const courseMockData: courseBasics[] = [
-  {
-    name: 'Data Structures And Algorithms',
-    code: 'CS-A1140',
-    period: 'I',
-    credits: '5',
-    rating: '4.7',
-    workload: '4.9',
-  },
-  {
-    name: 'Tuotantotalous 1',
-    code: 'TU-5014',
-    period: 'II',
-    credits: '5',
-    rating: '5',
-    workload: '1',
-  },
-  {
-    name: 'Tuotantotalous 2',
-    code: 'TU-5015',
-    period: 'II',
-    credits: '5',
-    rating: '5',
-    workload: '1',
-  },
-]
-
 const fetchCoursesFromDB = async () => {
   return await knex('course').select()
 }
