@@ -7,4 +7,4 @@ COPY src ./src
 COPY migrations ./migrations
 RUN npm install
 EXPOSE 4005
-CMD ["npm","run","migrate"]
+CMD ["npm","run","start"]
