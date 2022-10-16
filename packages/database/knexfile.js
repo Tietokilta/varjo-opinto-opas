@@ -3,10 +3,10 @@ module.exports = {
       client: 'pg',
       useNullAsDefault: true,
       connection: {
-        host: 'database',
-        user: 'postgres',
-        password: '1234',
-        database: 'postgres'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
       },
     },
   
@@ -14,10 +14,10 @@ module.exports = {
       client: 'pg',
       useNullAsDefault: true,
       connection: {
-        host: 'database',
-        user: 'postgres',
-        password: '1234',
-        database: 'postgres'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
       },
     },
   }

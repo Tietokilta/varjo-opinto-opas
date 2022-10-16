@@ -5,7 +5,7 @@ services:
     image: postgres:alpine
     restart: always
     environment:
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: $DB_PASSWORD
     networks:
       - voo
     healthcheck:
@@ -26,6 +26,12 @@ services:
     build:
       context: ./packages/database
       dockerfile: Dockerfile
+    environment:
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_HOST: $DB_HOST
+      DB_NAME: $DB_NAME
+      SISU_API_KEY: $SISU_USER_KEY
     depends_on:
       database:
         condition: service_healthy
@@ -37,6 +43,11 @@ services:
       context: ./packages/frontend
       dockerfile: Dockerfile
     container_name: voo-next-dev
+    environment:
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_HOST: $DB_HOST
+      DB_NAME: $DB_NAME
     depends_on:
       database:
         condition: service_healthy
