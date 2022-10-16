@@ -3,7 +3,7 @@ export type creditOption = '1' | '2' | '3' | '4' | '5' | '6' | '≥7' | undefine
 export interface courseBasics {
   name: string
   code: string
-  period: Exclude<periodOption, undefined>
+  period: string
   credits: string
   rating: string
   workload: string

@@ -25,6 +25,6 @@ export default function handler(
   const id = request.query.id
 
   if (request.method === 'GET') {
-    response.status(200).json({ mockCourseData })
+    response.status(200).json({ ...mockCourseData })
   }
 }
