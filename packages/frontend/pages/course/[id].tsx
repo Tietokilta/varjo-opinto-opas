@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next'
+import CourseReviewForm from '../../components/CourseReviewForm/CourseReviewForm'
 import CourseStat from '../../components/CourseStat'
 import CourseTextBlock from '../../components/CourseTextBlock'
 import ReviewCard from '../../components/ReviewCard'
@@ -43,6 +44,9 @@ const CoursePage: NextPage<courseFull> = ({
             />
           ))}
         </div>
+      </div>
+      <div className="col-span-full">
+        <CourseReviewForm />
       </div>
     </div>
   )
