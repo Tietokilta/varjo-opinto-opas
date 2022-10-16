@@ -1,5 +1,4 @@
-exports.up = (knex) => {
-    return knex.schema
+exports.up = (knex) => knex.schema
       .createTable('course', (table) => {
         table.string('course_code')
         table.string('credits_max')
@@ -18,10 +17,7 @@ exports.up = (knex) => {
         table.string('grading_information')
         table.string('additional_information')
       })
-  }
   
-  exports.down = (knex) => {
-    return knex.schema
+  exports.down = (knex) => knex.schema
       .dropTableIfExists('course')
       .dropTableIfExists('course_translations')
-  }
