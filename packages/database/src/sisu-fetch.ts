@@ -50,8 +50,8 @@ const courseTypes :string[] = [
 
 const putCourseToDb = async (course: Course): Promise<void> => {
     await knex('course').insert(course.base)
-    course.translations.forEach((translation) => {
-        knex('translation').insert(translation)
+    course.translations.forEach(async (translation) => {
+        await knex('translation').insert(translation)
     })
 }
 
@@ -71,7 +71,7 @@ function format(sisuCourse: any): Course{
         translations: []
     }
 
-    languages.forEach((language)=>{
+    languages.forEach((language) => {
         course.translations.push(
             {
                 translation: language,
@@ -101,7 +101,7 @@ async function getData(): Promise<void> {
     
     const insertedCourseCodes: string[] = []
 
-    courses.forEach((course)=>{
+    courses.forEach((course) => {
         if(!(insertedCourseCodes.includes(course.base.course_code))){
             insertedCourseCodes.push(course.base.course_code)
             putCourseToDb(course)
@@ -113,7 +113,7 @@ async function getData(): Promise<void> {
 
 knex('course').count().then((data) =>{
         if (data[0].count === '0'){
-            console.log('Start Sisu data fetched.')
+            console.log('Start Sisu data fetch.')
             getData()
         } else {
             console.log('Sisu data already fetched.')
