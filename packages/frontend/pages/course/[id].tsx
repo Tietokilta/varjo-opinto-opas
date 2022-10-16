@@ -1,7 +1,8 @@
 import { GetServerSideProps, NextPage } from 'next'
 import CourseStat from '../../components/CourseStat'
 import CourseTextBlock from '../../components/CourseTextBlock'
-import { courseFull } from '../../types/types'
+import ReviewCard from '../../components/ReviewCard'
+import { courseFull, review } from '../../types/types'
 
 const CoursePage: NextPage<courseFull> = ({
   name,
@@ -12,6 +13,7 @@ const CoursePage: NextPage<courseFull> = ({
   workload,
   content,
   learningResults,
+  reviews,
 }: courseFull) => {
   return (
     <div className="template-columns container mx-auto grid grid-cols-[1fr_1fr] grid-rows-[1fr_1fr] gap-8">
@@ -28,6 +30,20 @@ const CoursePage: NextPage<courseFull> = ({
       </div>
       <CourseTextBlock label="Description" text={content} />
       <CourseTextBlock label="Learning goals" text={learningResults} />
+      <div className="col-span-full">
+        <h2 className="mt-10 text-2xl font-bold">What others have said?</h2>
+        <div className="mt-4 flex flex-wrap gap-4">
+          {reviews.map((review: review) => (
+            <ReviewCard
+              key={review.text}
+              rating={review.rating}
+              workload={review.workload}
+              text={review.text}
+              courseTaken={review.courseTaken}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
