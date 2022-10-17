@@ -114,7 +114,7 @@ function format(sisuCourse: any): Course{
 
 async function getData(): Promise<void> { 
     const { data } = await axios.get(
-        `https://course.api.aalto.fi:443/api/sisu/v1/courseunitrealisations?USER_KEY=db42a46ce07036a8ce0040a30001d002`,
+        `https://course.api.aalto.fi:443/api/sisu/v1/courseunitrealisations?USER_KEY=${process.env.SISU_USER_KEY}`,
     )
 
     const cleanData = data.filter(check)
